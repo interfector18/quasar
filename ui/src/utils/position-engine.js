@@ -1,5 +1,5 @@
-import { getScrollbarWidth } from './scroll.js'
-import { client } from '../plugins/Platform.js'
+import { getScrollbarWidth } from 'quasar/src/utils/scroll.js'
+import { client } from 'quasar/src/plugins/Platform.js'
 
 let vpLeft, vpTop
 
@@ -140,7 +140,32 @@ export function setPosition (cfg) {
     }
   }
 
-  Object.assign(cfg.el.style, elStyle)
+  let kebabCase = (str) => {
+    return str
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/[\s_]+/g, '-')
+      .toLowerCase()
+  }
+
+  let getRules = (elStyle) => {
+    const newRules = [];
+    for (const p in elStyle) {
+      let rule = [];
+      if (elStyle[p] !== null && p !== void 0) {
+        rule.push(kebabCase(p))
+        rule.push(elStyle[p])
+        rule.push("important")
+        newRules.push(rule)
+      }
+    }
+    return newRules
+  };
+
+  // Object.assign(cfg.el.style, elStyle)
+  let cssTxt = getRules(elStyle);
+  for (const rule of cssTxt) {
+    cfg.el.style.setProperty(rule[0], rule[1], rule[2]);
+  }
 
   const
     targetProps = getTargetProps(cfg.el),
@@ -171,7 +196,11 @@ export function setPosition (cfg) {
     }
   }
 
-  Object.assign(cfg.el.style, elStyle)
+  // Object.assign(cfg.el.style, elStyle)
+  cssTxt = getRules(elStyle);
+  for (const rule of cssTxt) {
+    cfg.el.style.setProperty(rule[0], rule[1], rule[2]);
+  }
 
   // restore scroll position
   if (cfg.el.scrollTop !== scrollTop) {

@@ -1,33 +1,33 @@
 import Vue from 'vue'
 
-import QField from '../field/QField.js'
-import QIcon from '../icon/QIcon.js'
-import QChip from '../chip/QChip.js'
+import QField from 'quasar/src/components/field/QField.js'
+import QIcon from 'quasar/src/components/icon/QIcon.js'
+import QChip from 'quasar/src/components/chip/QChip.js'
 
-import QItem from '../item/QItem.js'
-import QItemSection from '../item/QItemSection.js'
-import QItemLabel from '../item/QItemLabel.js'
+import QItem from 'quasar/src/components/item/QItem.js'
+import QItemSection from 'quasar/src/components/item/QItemSection.js'
+import QItemLabel from 'quasar/src/components/item/QItemLabel.js'
 
-import QMenu from '../menu/QMenu.js'
-import QDialog from '../dialog/QDialog.js'
+import QMenu from './QMenu.js'
+import QDialog from 'quasar/src/components/dialog/QDialog.js'
 
-import { isDeepEqual } from '../../utils/is.js'
-import { stop, prevent, stopAndPrevent } from '../../utils/event.js'
-import { normalizeToInterval } from '../../utils/format.js'
-import { shouldIgnoreKey, isKeyCode } from '../../utils/key-composition.js'
-import { mergeSlot } from '../../utils/slot.js'
-import cache from '../../utils/cache.js'
+import { isDeepEqual } from 'quasar/src/utils/is.js'
+import { stop, prevent, stopAndPrevent } from 'quasar/src/utils/event.js'
+import { normalizeToInterval } from 'quasar/src/utils/format.js'
+import { shouldIgnoreKey, isKeyCode } from 'quasar/src/utils/key-composition.js'
+import { mergeSlot } from 'quasar/src/utils/slot.js'
+import cache from 'quasar/src/utils/cache.js'
 
-import { FormFieldMixin } from '../../mixins/form.js'
-import VirtualScroll from '../../mixins/virtual-scroll.js'
-import CompositionMixin from '../../mixins/composition.js'
-import ListenersMixin from '../../mixins/listeners.js'
+import { FormFieldMixin } from 'quasar/src/mixins/form.js'
+import VirtualScroll from 'quasar/src/mixins/virtual-scroll.js'
+import CompositionMixin from 'quasar/src/mixins/composition.js'
+import ListenersMixin from 'quasar/src/mixins/listeners.js'
 
 const validateNewValueMode = v => ['add', 'add-unique', 'toggle'].includes(v)
 const reEscapeList = '.*+?^${}()|[]\\'
 
 export default Vue.extend({
-  name: 'QSelect',
+  name: 'iwQSelect',
 
   mixins: [
     QField,

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-import ListenersMixin from '../../mixins/listeners.js'
+import ListenersMixin from 'quasar/src/mixins/listeners.js'
 
-import { slot } from '../../utils/slot.js'
+import { slot } from 'quasar/src/utils/slot.js'
 
 export default Vue.extend({
-  name: 'QPageSticky',
+  name: 'iwQPageSticky',
 
   mixins: [ ListenersMixin ],
 
@@ -32,6 +32,35 @@ export default Vue.extend({
       validator: v => v.length === 2
     },
     expand: Boolean
+  },
+
+  methods: {
+    appOffsets() {
+
+      var box = this.$root.$el.getBoundingClientRect();
+
+      var body = document.body;
+      var docEl = document.documentElement;
+
+      let screenWidth = docEl.clientWidth || body.clientWidth;
+      let screenHeight = docEl.clientHeight || body.clientHeight;
+
+      var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+      var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+      var clientTop = docEl.clientTop || body.clientTop || 0;
+      var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+      var top = box.top + scrollTop - clientTop;
+      var left = box.left + scrollLeft - clientLeft;
+
+      return {
+        top: (top),
+        left: (left),
+        right: (screenWidth - left - box.width),
+        bottom: (screenHeight - top - box.height),
+      };
+    }
   },
 
   computed: {
@@ -87,27 +116,32 @@ export default Vue.extend({
         posX = `${-dir * this.right}px`
       }
 
-      const css = { transform: `translate(${posX}, ${posY})` }
+      const css = { transform: `translate(${posX}, ${posY}) !important` }
 
       if (this.offset) {
-        css.margin = `${this.offset[1]}px ${this.offset[0]}px`
+        css.margin = `${this.offset[1]}px ${this.offset[0]}px !important`
       }
 
       if (attach.vertical === true) {
         if (this.left !== 0) {
-          css[this.$q.lang.rtl === true ? 'right' : 'left'] = `${this.left}px`
+          css[this.$q.lang.rtl === true ? 'right' : 'left'] = `${this.left}px !important`
         }
         if (this.right !== 0) {
-          css[this.$q.lang.rtl === true ? 'left' : 'right'] = `${this.right}px`
+          css[this.$q.lang.rtl === true ? 'left' : 'right'] = `${this.right}px !important`
         }
       }
       else if (attach.horizontal === true) {
         if (this.top !== 0) {
-          css.top = `${this.top}px`
+          css.top = `${this.top}px !important`
         }
         if (this.bottom !== 0) {
-          css.bottom = `${this.bottom}px`
+          css.bottom = `${this.bottom}px !important`
         }
+      } else {
+        let appOffsets = this.appOffsets();
+        console.log(appOffsets)
+        css.bottom = `-${appOffsets.top}px !important`;
+        css.right = `${appOffsets.right}px !important`;
       }
 
       return css

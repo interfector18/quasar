@@ -1,25 +1,25 @@
 import Vue from 'vue'
 
-import AnchorMixin from '../../mixins/anchor.js'
-import ModelToggleMixin from '../../mixins/model-toggle.js'
-import DarkMixin from '../../mixins/dark.js'
-import PortalMixin, { closePortalMenus } from '../../mixins/portal.js'
-import TransitionMixin from '../../mixins/transition.js'
-import AttrsMixin from '../../mixins/attrs.js'
+import AnchorMixin from 'quasar/src/mixins/anchor.js'
+import ModelToggleMixin from 'quasar/src/mixins/model-toggle.js'
+import DarkMixin from 'quasar/src/mixins/dark.js'
+import PortalMixin, { closePortalMenus } from 'quasar/src/mixins/portal.js'
+import TransitionMixin from 'quasar/src/mixins/transition.js'
+import AttrsMixin from 'quasar/src/mixins/attrs.js'
 
-import ClickOutside from './ClickOutside.js'
-import { getScrollTarget } from '../../utils/scroll.js'
-import { create, stop, position, stopAndPreventClick } from '../../utils/event.js'
-import EscapeKey from '../../utils/escape-key.js'
+import ClickOutside from 'quasar/src/components/menu/ClickOutside.js'
+import { getScrollTarget } from 'quasar/src/utils/scroll.js'
+import { create, stop, position, stopAndPreventClick } from 'quasar/src/utils/event.js'
+import EscapeKey from 'quasar/src/utils/escape-key.js'
 
-import { slot } from '../../utils/slot.js'
+import { slot } from 'quasar/src/utils/slot.js'
 
 import {
   validatePosition, validateOffset, setPosition, parsePosition
-} from '../../utils/position-engine.js'
+} from './utils/position-engine.js'
 
 export default Vue.extend({
-  name: 'QMenu',
+  name: 'iwQMenu',
 
   mixins: [
     AttrsMixin,
